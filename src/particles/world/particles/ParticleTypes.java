@@ -8,5 +8,7 @@ public class ParticleTypes {
 	public static byte ROCK = 3;
 	public static byte ACID = 4;
 	public static byte GLASS = 5;
+	public static byte FIRE = 6;
+	public static byte WATERVAPOR = 7;
 	
 }

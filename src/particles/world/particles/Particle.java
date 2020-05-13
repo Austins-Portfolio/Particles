@@ -8,8 +8,10 @@ public abstract class Particle {
 
 	protected byte type;
 	protected Color color;
-	protected boolean solid, liquid, gas, logic, lifetime;
-	protected int tempW, tempH;
+	protected boolean solid = false, liquid = false, gas = false, logic = false, lifetime = false;
+	protected int heat;
+	protected int freezing_point;
+	protected int melting_point;
 	
 	private long last_time = System.currentTimeMillis();
 	protected long update_time = 10;
@@ -20,14 +22,15 @@ public abstract class Particle {
 	protected long birth_time = System.currentTimeMillis();
 	protected long life_time = 3000;
 	
+	protected int tempW, tempH;
+	
 	protected boolean i;	
 	public void generateI() {
 		i = Math.random() < 0.5;
 	}
 	
 	public boolean shouldUpdate() {
-		long current_time = System.currentTimeMillis();
-		if(current_time - last_time >= update_time) {
+		if(System.currentTimeMillis() - last_time >= update_time) {
 			last_time = System.currentTimeMillis();
 			return true;
 		}
@@ -35,8 +38,7 @@ public abstract class Particle {
 	}
 	
 	public boolean shouldUpdateLogic() {
-		long current_time = System.currentTimeMillis();
-		if(current_time - logic_last_time >= logic_update_time) {
+		if(System.currentTimeMillis() - logic_last_time >= logic_update_time) {
 			logic_last_time = System.currentTimeMillis();
 			return true;
 		}
@@ -44,8 +46,7 @@ public abstract class Particle {
 	}
 	
 	public boolean lifetimeUp() {
-		long current_time = System.currentTimeMillis();
-		if(current_time - birth_time >= life_time) {
+		if(System.currentTimeMillis() - birth_time >= life_time) {
 			return true;
 		}
 		return false;
@@ -67,7 +68,7 @@ public abstract class Particle {
 				logic(world, tempW, tempH);
 			}
 			if(lifetime) {
-				lifetime();
+				lifetime(world, tempW, tempH);
 			}
 		}
 	}
@@ -126,14 +127,59 @@ public abstract class Particle {
 	}
 	
 	public void moveGas(World world, int w, int h) {
+		if(world.spotEmptyAndInBounds(w, h-1)) {
+			world.addParticle(w, h, null);
+			world.addParticle(w, h-1, this);
+			h--;
+			generateI();
+		}else {
+			if(world.getParticle(w, h-1)!=null) {
+				if(world.getParticle(w, h-1).getType() != this.type) {
+					generateI();
+				}
+				if(world.spotEmptyAndInBounds(w+1, h-1)) {
+					if(i) {
+					world.addParticle(w, h, null);
+					world.addParticle(w+1, h-1, this);
+					w++;
+					h--;
+					}
+				}else if(world.spotEmptyAndInBounds(w+1, h)) {
+					if(i) {
+					world.addParticle(w, h, null);
+					world.addParticle(w+1, h, this);
+					w++;
+					}
+				}else {
+						generateI();
+				}
+				if(world.spotEmptyAndInBounds(w-1, h-1)){
+					if(!i) {
+					world.addParticle(w, h, null);
+					world.addParticle(w-1, h-1, this);
+					w--;
+					h--;
+					}
+				}else if(world.spotEmptyAndInBounds(w-1, h)){
+					if(!i) {
+					world.addParticle(w, h, null);
+					world.addParticle(w-1, h, this);
+					w--;
+					}
+				}else {
+					generateI();
+				}
+			}
+		}
 		
+		updateWH(w, h);
 	}
 	
 	public void logic(World world, int w, int h) {
 		
 	}
 	
-	public void lifetime() {
+	public void lifetime(World world, int w, int h) {
 		
 	}
 	

@@ -31,6 +31,10 @@ public class Keys implements KeyListener{
 		if(e.getKeyCode() == KeyEvent.VK_3) {
 			particlePallet.setSelection(3);
 		}
+		
+		if(e.getKeyCode() == KeyEvent.VK_4) {
+			particlePallet.setSelection(4);
+		}
 	}
 
 	@Override

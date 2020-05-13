@@ -1,12 +1,8 @@
 package particles.world.particles;
 
-import particles.world.particles.*;
-import particles.world.particles.liquids.Acid;
-import particles.world.particles.liquids.Lava;
-import particles.world.particles.liquids.Water;
-import particles.world.particles.solids.Glass;
-import particles.world.particles.solids.Rock;
-import particles.world.particles.solids.Wall;
+import particles.world.particles.solids.*;
+import particles.world.particles.liquids.*;
+import particles.world.particles.gases.*;
 
 public class ParticlePallet {
 
@@ -27,6 +23,9 @@ public class ParticlePallet {
 			case 3:{
 				return new Acid();
 			}
+			case 4:{
+				return new Fire();
+			}
 		};
 		
 		return null;
@@ -43,6 +42,9 @@ public class ParticlePallet {
 		case 3:{
 			return new Glass();
 		}
+		case 4:{
+			return new WaterVapor();
+		}
 	};
 		
 		return null;
@@ -58,6 +60,9 @@ public class ParticlePallet {
 			}
 			case 3:{
 				return "[Acid,Glass]";
+			}
+			case 4:{
+				return "[Fire,WaterVapor]";
 			}
 		};
 		return "";
