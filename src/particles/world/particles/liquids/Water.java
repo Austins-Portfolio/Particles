@@ -17,6 +17,7 @@ public class Water extends Particle{
 		melting_point = 212;
 		freezing_point = 32;
 		heat_dispersion_rate = 0.5;
+		update_time = 10;
 		logic = true;
 	}
 	
