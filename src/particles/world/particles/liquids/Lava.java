@@ -19,6 +19,11 @@ public class Lava extends Particle{
 		solid = false;
 		liquid = true;
 		gas = false;
+		non_insulator = true;
+		heat = 1600;
+		heat_dispersion_rate = 0.1f;
+		heat_correction_value = 0;
+		freezing_point = 1300;
 		logic = true;
 		update_time = 50;
 		logic_update_time = 1000;
@@ -27,8 +32,9 @@ public class Lava extends Particle{
 	
 	private boolean hot = true;
 	public void logic(World world, int w, int h) {
-		makeRock(world, w, h);
+		//makeRock(world, w, h);
 		spawnFire(world, w, h);
+		freeze(world, w, h);
 	}
 	
 	public void makeRock(World world, int w, int h) {
@@ -38,21 +44,21 @@ public class Lava extends Particle{
 			 world.addParticle(w, h+1, new Rock());
 			 hot = false;
 			}
-		}
+		}else
 		if(world.spotOccupiedAndInBounds(w, h-1) && hot) {
 			if(world.getParticle(w, h-1).getType()==ParticleTypes.WATER) {
 			 world.addParticle(w, h, null);
 			 world.addParticle(w, h-1, new Rock());
 			 hot = false;
 			}
-		}
+		}else
 		if(world.spotOccupiedAndInBounds(w+1, h) && hot) {
 			if(world.getParticle(w+1, h).getType()==ParticleTypes.WATER) {
 			 world.addParticle(w, h, null);
 			 world.addParticle(w+1, h, new Rock());
 			 hot = false;
 			}
-		}
+		}else
 		if(world.spotOccupiedAndInBounds(w-1, h) && hot) {
 			if(world.getParticle(w-1, h).getType()==ParticleTypes.WATER) {
 			 world.addParticle(w, h, null);
@@ -64,7 +70,9 @@ public class Lava extends Particle{
 	
 	public boolean shouldSpawnFire() {
 		if(System.currentTimeMillis() - last_spawn >= spawn_time) {
-			return true;
+			if(heat>=200) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -80,6 +88,7 @@ public class Lava extends Particle{
 				world.addParticle(w, h-1, new Fire());
 				randomSpawn();
 				last_spawn = System.currentTimeMillis();
+				heat-=100;
 			}
 		}
 		if(world.spotEmptyAndInBounds(w-1, h)) {
@@ -87,6 +96,7 @@ public class Lava extends Particle{
 				world.addParticle(w-1, h, new Fire());
 				randomSpawn();
 				last_spawn = System.currentTimeMillis();
+				heat-=100;
 			}
 		}
 		if(world.spotEmptyAndInBounds(w+1, h)) {
@@ -94,8 +104,17 @@ public class Lava extends Particle{
 				world.addParticle(w+1, h, new Fire());
 				randomSpawn();
 				last_spawn = System.currentTimeMillis();
+				heat-=100;
 			}
 		}
 	}
 
+	public void freeze(World world, int w, int h) {
+		if(heat <= freezing_point) {
+			Rock rock = new Rock();
+			rock.setHeat(heat);
+			world.addParticle(w, h, rock);
+		}
+	}
+	
 }

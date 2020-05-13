@@ -8,7 +8,7 @@ public class World {
 
 	private int width, height, world_scale;
 	public Particle[][] particles;
-	private int spacing = 2;
+	private int spacing = 10;
 	private int update_steps = 1;
 	
 	public World(int width, int height, int world_scale) {

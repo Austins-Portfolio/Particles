@@ -20,10 +20,13 @@ public class Fire extends Particle{
 		liquid = false;
 		gas = true;
 		logic = true;
+		non_insulator = true;
 		lifetime = true;
 		update_time = 50;
 		logic_update_time = 1000;
 		life_time = 2000;
+		heat = 10000;
+		heat_dispersion_rate = 1;
 	}
 
 	public void moveGas(World world, int w, int h) {
@@ -62,7 +65,9 @@ public class Fire extends Particle{
 	
 	public boolean shouldSpawnSmoke() {
 		if(System.currentTimeMillis() - last_spawn >= spawn_time) {
-			return true;
+			if(heat>=60) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -82,6 +87,7 @@ public class Fire extends Particle{
 				world.addParticle(w, h-1, new Smoke());
 				randomSpawn();
 				last_spawn = System.currentTimeMillis();
+				heat -= 30;
 			}
 		}
 		if(world.spotEmptyAndInBounds(w, h+1)) {
@@ -89,6 +95,7 @@ public class Fire extends Particle{
 				world.addParticle(w, h+1, new Smoke());
 				randomSpawn();
 				last_spawn = System.currentTimeMillis();
+				heat -= 30;
 			}
 		}
 		if(world.spotEmptyAndInBounds(w-1, h)) {
@@ -96,6 +103,7 @@ public class Fire extends Particle{
 				world.addParticle(w-1, h, new Smoke());
 				randomSpawn();
 				last_spawn = System.currentTimeMillis();
+				heat -= 30;
 			}
 		}
 		if(world.spotEmptyAndInBounds(w+1, h)) {
@@ -103,6 +111,7 @@ public class Fire extends Particle{
 				world.addParticle(w+1, h, new Smoke());
 				randomSpawn();
 				last_spawn = System.currentTimeMillis();
+				heat -= 30;
 			}
 		}
 	}

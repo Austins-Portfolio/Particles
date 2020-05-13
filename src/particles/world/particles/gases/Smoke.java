@@ -17,6 +17,8 @@ public class Smoke extends Particle{
 		update_time = 50;
 		logic_update_time = 1000;
 		life_time = 2000;
+		heat = 30;
+		heat_dispersion_rate = 0.75;
 	}
 
 	public void moveGas(World world, int w, int h) {

@@ -7,6 +7,7 @@ import java.awt.event.MouseListener;
 
 import particles.utils.Clock;
 import particles.world.World;
+import particles.world.particles.Particle;
 import particles.world.particles.ParticlePallet;
 
 public class Mouse implements MouseListener{
@@ -112,6 +113,10 @@ public class Mouse implements MouseListener{
 	public void drawMouse(Graphics2D g2) {
 		g2.setColor(Color.WHITE);
 		g2.drawRect(mouseMotion.x-mouseSize/2, mouseMotion.y-mouseSize/2, mouseSize, mouseSize);
+		if(world.spotOccupiedAndInBounds(mouseMotion.x, mouseMotion.y)) {
+			Particle particle = world.getParticle(mouseMotion.x, mouseMotion.y);
+			System.out.println("Type:" + particle.getType() +" Heat:" + particle.getHeat());
+		}
 	}
 
 }
