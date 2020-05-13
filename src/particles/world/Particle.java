@@ -59,30 +59,35 @@ public abstract class Particle {
 				if(world.getParticle(w, h+1).getType() != this.type) {
 					generateI();
 				}
-			}
-			if(i) {
 				if(world.spotEmptyAndInBounds(w+1, h+1)) {
+					if(i) {
 					world.addParticle(w, h, null);
 					world.addParticle(w+1, h+1, this);
 					w++;
 					h++;
+					}
 				}else if(world.spotEmptyAndInBounds(w+1, h)) {
+					if(i) {
 					world.addParticle(w, h, null);
 					world.addParticle(w+1, h, this);
 					w++;
+					}
 				}else {
-					generateI();
+						generateI();
 				}
-			}else {
 				if(world.spotEmptyAndInBounds(w-1, h+1)){
+					if(!i) {
 					world.addParticle(w, h, null);
 					world.addParticle(w-1, h+1, this);
 					w--;
 					h++;
+					}
 				}else if(world.spotEmptyAndInBounds(w-1, h)){
+					if(!i) {
 					world.addParticle(w, h, null);
 					world.addParticle(w-1, h, this);
 					w--;
+					}
 				}else {
 					generateI();
 				}
