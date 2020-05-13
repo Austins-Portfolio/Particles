@@ -28,40 +28,6 @@ public class Fire extends Particle{
 		heat = 10000;
 		heat_dispersion_rate = 1;
 	}
-
-	public void moveGas(World world, int w, int h) {
-		if(world.spotEmptyAndInBounds(w, h-1)) {
-			if(i) {
-			world.addParticle(w, h, null);
-			world.addParticle(w, h-1, this);
-			h--;
-			}
-		}
-		if(world.getParticle(w, h-1)!=null&&!i) {
-			if(world.spotEmptyAndInBounds(w+1, h-1)) {
-				world.addParticle(w, h, null);
-				world.addParticle(w+1, h-1, this);
-				w++;
-				h--;
-			}else if(world.spotEmptyAndInBounds(w+1, h)) {
-				world.addParticle(w, h, null);
-				world.addParticle(w+1, h, this);
-				w++;
-			}
-			if(world.spotEmptyAndInBounds(w-1, h-1)){
-				world.addParticle(w, h, null);
-				world.addParticle(w-1, h-1, this);
-				w--;
-				h--;
-			}else if(world.spotEmptyAndInBounds(w-1, h)){
-				world.addParticle(w, h, null);
-				world.addParticle(w-1, h, this);
-				w--;
-			}
-		}
-		generateI();
-		updateWH(w, h);
-	}
 	
 	public boolean shouldSpawnSmoke() {
 		if(System.currentTimeMillis() - last_spawn >= spawn_time) {

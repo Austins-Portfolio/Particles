@@ -16,10 +16,12 @@ public class WaterVapor extends Particle{
 		liquid = false;
 		gas = true;
 		non_insulator = true;
+		heat = 360;
 		freezing_point = 212;
 		heat_dispersion_rate = 0.5;
 		heat_correction_value = 0.0000000001;
 		logic = true;
+		update_time = 50;
 	}
 	
 	public void logic(World world, int w, int h) {
@@ -33,5 +35,5 @@ public class WaterVapor extends Particle{
 			world.addParticle(w, h, water);
 		}
 	}
-
+	
 }

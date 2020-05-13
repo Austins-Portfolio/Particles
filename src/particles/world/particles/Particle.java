@@ -90,7 +90,7 @@ public abstract class Particle {
 			h++;
 			generateI();
 		}else {
-			if(world.getParticle(w, h+1)!=null) {
+			if(world.spotOccupiedAndInBounds(w, h+1)) {
 				if(world.getParticle(w, h+1).getType() != this.type) {
 					generateI();
 				}
@@ -140,28 +140,26 @@ public abstract class Particle {
 	}
 	
 	public void moveGas(World world, int w, int h) {
-		if(world.spotEmptyAndInBounds(w, h-1)) {
+		if(world.spotEmptyAndInBounds(w, h-1)&&i) {
 			world.addParticle(w, h, null);
 			world.addParticle(w, h-1, this);
 			h--;
 			generateI();
 		}else {
-			if(world.getParticle(w, h-1)!=null) {
-				if(world.getParticle(w, h-1).getType() != this.type) {
-					generateI();
-				}
 				if(world.spotEmptyAndInBounds(w+1, h-1)) {
-					if(i) {
+					if(!i) {
 					world.addParticle(w, h, null);
 					world.addParticle(w+1, h-1, this);
 					w++;
 					h--;
+					generateI();
 					}
 				}else if(world.spotEmptyAndInBounds(w+1, h)) {
-					if(i) {
+					if(!i) {
 					world.addParticle(w, h, null);
 					world.addParticle(w+1, h, this);
 					w++;
+					generateI();
 					}
 				}else {
 						generateI();
@@ -172,18 +170,19 @@ public abstract class Particle {
 					world.addParticle(w-1, h-1, this);
 					w--;
 					h--;
+					generateI();
 					}
 				}else if(world.spotEmptyAndInBounds(w-1, h)){
 					if(!i) {
 					world.addParticle(w, h, null);
 					world.addParticle(w-1, h, this);
 					w--;
+					generateI();
 					}
 				}else {
 					generateI();
 				}
 			}
-		}
 		
 		updateWH(w, h);
 	}
