@@ -1,10 +1,10 @@
-package particles.world.particles;
+package particles.world.particles.solids;
 
 import java.awt.Color;
 
-import particles.world.Particle;
-import particles.world.ParticleTypes;
 import particles.world.World;
+import particles.world.particles.Particle;
+import particles.world.particles.ParticleTypes;
 
 public class Wall extends Particle{
 	

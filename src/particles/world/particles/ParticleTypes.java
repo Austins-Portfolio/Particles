@@ -1,4 +1,4 @@
-package particles.world;
+package particles.world.particles;
 
 public class ParticleTypes {
 

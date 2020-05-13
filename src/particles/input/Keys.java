@@ -3,7 +3,7 @@ package particles.input;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import particles.world.ParticlePallet;
+import particles.world.particles.ParticlePallet;
 
 public class Keys implements KeyListener{
 

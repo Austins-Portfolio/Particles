@@ -6,11 +6,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import particles.utils.Clock;
-import particles.world.ParticlePallet;
 import particles.world.World;
-import particles.world.particles.Lava;
-import particles.world.particles.Wall;
-import particles.world.particles.Water;
+import particles.world.particles.ParticlePallet;
 
 public class Mouse implements MouseListener{
 	

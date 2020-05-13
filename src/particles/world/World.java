@@ -2,6 +2,8 @@ package particles.world;
 
 import java.awt.Graphics2D;
 
+import particles.world.particles.Particle;
+
 public class World {
 
 	private int width, height, world_scale;
@@ -97,7 +99,7 @@ public class World {
 		for(int w = 0; w < width; w++) {
 			for(int h = 0; h < height; h++) {
 				if(!spotEmpty(w,h)&&inBounds(w,h)) {
-					g2.setColor(particles[w][h].color);
+					g2.setColor(particles[w][h].getColor());
 					g2.fillRect(w*world_scale, h*world_scale, world_scale, world_scale);
 				}
 			}

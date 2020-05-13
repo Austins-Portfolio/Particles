@@ -1,6 +1,12 @@
-package particles.world;
+package particles.world.particles;
 
 import particles.world.particles.*;
+import particles.world.particles.liquids.Acid;
+import particles.world.particles.liquids.Lava;
+import particles.world.particles.liquids.Water;
+import particles.world.particles.solids.Glass;
+import particles.world.particles.solids.Rock;
+import particles.world.particles.solids.Wall;
 
 public class ParticlePallet {
 

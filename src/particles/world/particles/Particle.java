@@ -1,12 +1,14 @@
-package particles.world;
+package particles.world.particles;
 
 import java.awt.Color;
+
+import particles.world.World;
 
 public abstract class Particle {
 
 	protected byte type;
 	protected Color color;
-	protected boolean solid, liquid, gas, logic;
+	protected boolean solid, liquid, gas, logic, lifetime;
 	protected int tempW, tempH;
 	
 	private long last_time = System.currentTimeMillis();
@@ -14,6 +16,9 @@ public abstract class Particle {
 	
 	private long logic_last_time = System.currentTimeMillis();
 	protected long logic_update_time = 10;
+	
+	protected long birth_time = System.currentTimeMillis();
+	protected long life_time = 3000;
 	
 	protected boolean i;	
 	public void generateI() {
@@ -38,6 +43,14 @@ public abstract class Particle {
 		return false;
 	}
 	
+	public boolean lifetimeUp() {
+		long current_time = System.currentTimeMillis();
+		if(current_time - birth_time >= life_time) {
+			return true;
+		}
+		return false;
+	}
+	
 	public void update(World world, int w, int h) {
 		if(shouldUpdate()) {
 			updateWH(w, h);
@@ -52,6 +65,9 @@ public abstract class Particle {
 			}
 			if(shouldUpdateLogic() && logic) {
 				logic(world, tempW, tempH);
+			}
+			if(lifetime) {
+				lifetime();
 			}
 		}
 	}
@@ -114,6 +130,10 @@ public abstract class Particle {
 	}
 	
 	public void logic(World world, int w, int h) {
+		
+	}
+	
+	public void lifetime() {
 		
 	}
 	

@@ -1,15 +1,12 @@
 package particles.launcher;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
-
 import particles.graphics.Window;
 import particles.input.Keys;
 import particles.input.Mouse;
-import particles.input.MouseMotion;
 import particles.utils.Clock;
-import particles.world.ParticlePallet;
 import particles.world.World;
+import particles.world.particles.ParticlePallet;
 
 public class Launcher {
 

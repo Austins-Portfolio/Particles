@@ -1,7 +1,7 @@
-package particles.world.particles;
+package particles.world.particles.liquids;
 
-import particles.world.Particle;
-import particles.world.ParticleTypes;
+import particles.world.particles.Particle;
+import particles.world.particles.ParticleTypes;
 
 public class Water extends Particle{
 	
