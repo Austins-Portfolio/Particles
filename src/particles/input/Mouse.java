@@ -1,5 +1,7 @@
 package particles.input;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -105,9 +107,14 @@ public class Mouse implements MouseListener{
 		if(mouseSize < world.getWorld_scale()) {
 			mouseSize = world.getWorld_scale();
 		}
-		if(mouseSize > world.getWorld_scale()*10) {
-			mouseSize = world.getWorld_scale()*10;
+		if(mouseSize > world.getWorld_scale()*30) {
+			mouseSize = world.getWorld_scale()*30;
 		}
+	}
+	
+	public void drawMouse(Graphics2D g2) {
+		g2.setColor(Color.WHITE);
+		g2.drawRect(mouseMotion.x-mouseSize/2, mouseMotion.y-mouseSize/2, mouseSize, mouseSize);
 	}
 
 }

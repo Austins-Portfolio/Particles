@@ -52,6 +52,7 @@ public class Launcher {
 				Graphics2D g2 = window.getGraphics();
 				g2.clearRect(0, 0, window.getWidth(), window.getHeight());
 				world.draw(g2);
+				mouse.drawMouse(g2);
 				g2.dispose();
 				window.swapBuffer();
 				update_clock.unpause();
