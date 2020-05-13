@@ -11,6 +11,7 @@ public class Lava extends Particle{
 	private boolean spawn;
 	private long last_spawn = 0;
 	private long spawn_time = 300;
+	private double spawn_chance = 0.04;
 	
 	public Lava() {
 		type = ParticleTypes.LAVA;
@@ -69,7 +70,7 @@ public class Lava extends Particle{
 	}
 	
 	public void randomSpawn() {
-		spawn = Math.random() < 0.04;
+		spawn = Math.random() < spawn_chance;
 	}
 	
 	public void spawnFire(World world, int w, int h) {

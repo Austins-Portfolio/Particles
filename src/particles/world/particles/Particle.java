@@ -121,6 +121,13 @@ public abstract class Particle {
 					generateI();
 				}
 			}
+		}if(world.spotOccupiedAndInBounds(w, h+1)) {
+			if(world.getParticle(w, h+1).gas) {
+				world.addParticle(w, h, world.getParticle(w, h+1));
+				world.addParticle(w, h+1, this);
+				h++;
+				generateI();
+			}
 		}
 		
 		updateWH(w, h);

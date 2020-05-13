@@ -5,9 +5,13 @@ import java.awt.Color;
 import particles.world.World;
 import particles.world.particles.Particle;
 import particles.world.particles.ParticleTypes;
-import particles.world.particles.solids.Rock;
 
 public class Fire extends Particle{
+	
+	private boolean spawn;
+	private long last_spawn = 0;
+	private long spawn_time = 100;
+	private double spawn_chance = 0.5;
 	
 	public Fire() {
 		type = ParticleTypes.FIRE;
@@ -56,11 +60,51 @@ public class Fire extends Particle{
 		updateWH(w, h);
 	}
 	
-	boolean should_move = true;
+	public boolean shouldSpawnSmoke() {
+		if(System.currentTimeMillis() - last_spawn >= spawn_time) {
+			return true;
+		}
+		return false;
+	}
+	
+	public void randomSpawn() {
+		spawn = Math.random() < spawn_chance;
+	}
 	
 	public void logic(World world, int w, int h) {
-		//should_move = (Math.random()*10) >= ((System.currentTimeMillis()-birth_time)*Math.random());
-		//gas = should_move;
+		spawnSmoke(world, w, h);
+	}
+	
+	public void spawnSmoke(World world, int w, int h) {
+		randomSpawn();
+		if(world.spotEmptyAndInBounds(w, h-1)) {
+			if(spawn&&shouldSpawnSmoke()) {
+				world.addParticle(w, h-1, new Smoke());
+				randomSpawn();
+				last_spawn = System.currentTimeMillis();
+			}
+		}
+		if(world.spotEmptyAndInBounds(w, h+1)) {
+			if(spawn&&shouldSpawnSmoke()) {
+				world.addParticle(w, h+1, new Smoke());
+				randomSpawn();
+				last_spawn = System.currentTimeMillis();
+			}
+		}
+		if(world.spotEmptyAndInBounds(w-1, h)) {
+			if(spawn&&shouldSpawnSmoke()) {
+				world.addParticle(w-1, h, new Smoke());
+				randomSpawn();
+				last_spawn = System.currentTimeMillis();
+			}
+		}
+		if(world.spotEmptyAndInBounds(w+1, h)) {
+			if(spawn&&shouldSpawnSmoke()) {
+				world.addParticle(w+1, h, new Smoke());
+				randomSpawn();
+				last_spawn = System.currentTimeMillis();
+			}
+		}
 	}
 	
 	public void lifetime(World world, int w, int h) {
