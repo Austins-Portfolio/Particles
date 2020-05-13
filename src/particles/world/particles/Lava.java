@@ -14,7 +14,7 @@ public class Lava extends Particle{
 		gas = false;
 		logic = true;
 		update_time = 50;
-		logic_update_time = 2000;
+		logic_update_time = 1000;
 	}
 	
 	private boolean hot = true;
