@@ -11,7 +11,7 @@ import particles.world.particles.ParticlePallet;
 public class Launcher {
 
 	public static void main(String[] args) {
-		Window window = new Window(1280,600,"Particles");
+		Window window = new Window(1280,900,"Particles");
 		World world = new World(window.getWidth(), window.getHeight(),4);
 		ParticlePallet pp = new ParticlePallet();
 		Mouse mouse = new Mouse(world, pp);

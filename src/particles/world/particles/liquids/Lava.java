@@ -20,7 +20,7 @@ public class Lava extends Particle{
 		liquid = true;
 		gas = false;
 		non_insulator = true;
-		heat = 1600;
+		heat = 2400;
 		heat_dispersion_rate = 0.1f;
 		heat_correction_value = 0;
 		freezing_point = 1300;
