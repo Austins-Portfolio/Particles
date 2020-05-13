@@ -63,9 +63,18 @@ public class World {
 		return false;
 	}
 	
+	public boolean spotEmptyAndInBounds(int w, int h) {
+		if(inBounds(w, h)) {
+			if(spotEmpty(w, h)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public void update() {
 		for(int i = 0; i < update_steps; i++) {
-			for(int h = 0; h < height; h++) {
+			for(int h = height; h > 0; h--) {
 				for(int w = 0; w < width; w++) {
 					if(!spotEmpty(w,h)) {
 						particles[w][h].update(this, w, h);
