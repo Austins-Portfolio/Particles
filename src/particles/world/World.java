@@ -72,6 +72,15 @@ public class World {
 		return false;
 	}
 	
+	public boolean spotOccupiedAndInBounds(int w, int h) {
+		if(inBounds(w, h)) {
+			if(!spotEmpty(w, h)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public void update() {
 		for(int i = 0; i < update_steps; i++) {
 			for(int h = height; h > 0; h--) {

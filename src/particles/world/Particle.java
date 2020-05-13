@@ -9,8 +9,11 @@ public abstract class Particle {
 	protected boolean solid, liquid, gas, logic;
 	protected int tempW, tempH;
 	
-	private long lasttime = System.currentTimeMillis();
-	protected long updatetime = 10;
+	private long last_time = System.currentTimeMillis();
+	protected long update_time = 10;
+	
+	private long logic_last_time = System.currentTimeMillis();
+	protected long logic_update_time = 10;
 	
 	protected boolean i;	
 	public void generateI() {
@@ -18,9 +21,18 @@ public abstract class Particle {
 	}
 	
 	public boolean shouldUpdate() {
-		long currenttime = System.currentTimeMillis();
-		if(currenttime - lasttime >= updatetime) {
-			lasttime = System.currentTimeMillis();
+		long current_time = System.currentTimeMillis();
+		if(current_time - last_time >= update_time) {
+			last_time = System.currentTimeMillis();
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean shouldUpdateLogic() {
+		long current_time = System.currentTimeMillis();
+		if(current_time - logic_last_time >= logic_update_time) {
+			logic_last_time = System.currentTimeMillis();
 			return true;
 		}
 		return false;
@@ -38,7 +50,7 @@ public abstract class Particle {
 			if(gas) {
 				moveGas(world, tempW, tempH);
 			}
-			if(logic) {
+			if(shouldUpdateLogic() && logic) {
 				logic(world, tempW, tempH);
 			}
 		}
