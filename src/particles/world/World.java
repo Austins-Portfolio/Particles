@@ -95,6 +95,19 @@ public class World {
 		}
 	}
 	
+	public void updateThread(int startW, int startH, int endW, int endH) {
+		for(int i = 0; i < update_steps; i++) {
+			for(int h = endH-1; h > startH; h--) {
+				for(int w = startW; w < endW; w++) {
+					
+					if(!spotEmpty(w,h)) {
+						particles[w][h].update(this, w, h);
+					}
+				}
+			}
+		}
+	}
+	
 	public void draw(Graphics2D g2) {
 		for(int w = 0; w < width; w++) {
 			for(int h = 0; h < height; h++) {
