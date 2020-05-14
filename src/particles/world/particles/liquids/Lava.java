@@ -70,7 +70,7 @@ public class Lava extends Particle{
 	
 	public boolean shouldSpawnFire() {
 		if(System.currentTimeMillis() - last_spawn >= spawn_time) {
-			if(heat>=200) {
+			if(heat>=2100) {
 				return true;
 			}
 		}
@@ -88,7 +88,7 @@ public class Lava extends Particle{
 				world.addParticle(w, h-1, new Fire());
 				randomSpawn();
 				last_spawn = System.currentTimeMillis();
-				heat-=100;
+				heat-=400;
 			}
 		}
 		if(world.spotEmptyAndInBounds(w-1, h)) {
@@ -96,7 +96,7 @@ public class Lava extends Particle{
 				world.addParticle(w-1, h, new Fire());
 				randomSpawn();
 				last_spawn = System.currentTimeMillis();
-				heat-=100;
+				heat-=400;
 			}
 		}
 		if(world.spotEmptyAndInBounds(w+1, h)) {
@@ -104,7 +104,7 @@ public class Lava extends Particle{
 				world.addParticle(w+1, h, new Fire());
 				randomSpawn();
 				last_spawn = System.currentTimeMillis();
-				heat-=100;
+				heat-=400;
 			}
 		}
 	}

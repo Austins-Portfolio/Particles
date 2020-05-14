@@ -87,20 +87,7 @@ public class World {
 		for(int i = 0; i < update_steps; i++) {
 			for(int h = height-1; h > 0; h--) {
 				for(int w = 0; w < width; w++) {
-					if(!spotEmpty(w,h)) {
-						particles[w][h].update(this, w, h);
-					}
-				}
-			}
-		}
-	}
-	
-	public void updateThread(int startW, int startH, int endW, int endH) {
-		for(int i = 0; i < update_steps; i++) {
-			for(int h = endH-1; h > startH; h--) {
-				for(int w = startW; w < endW; w++) {
-					
-					if(!spotEmpty(w,h)) {
+					if(spotOccupiedAndInBounds(w,h)) {
 						particles[w][h].update(this, w, h);
 					}
 				}
@@ -111,7 +98,7 @@ public class World {
 	public void draw(Graphics2D g2) {
 		for(int w = 0; w < width; w++) {
 			for(int h = 0; h < height; h++) {
-				if(!spotEmpty(w,h)&&inBounds(w,h)) {
+				if(spotOccupiedAndInBounds(w,h)) {
 					g2.setColor(particles[w][h].getColor());
 					g2.fillRect(w*world_scale, h*world_scale, world_scale, world_scale);
 				}

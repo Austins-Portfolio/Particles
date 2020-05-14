@@ -23,9 +23,9 @@ public class Fire extends Particle{
 		non_insulator = true;
 		lifetime = true;
 		update_time = 50;
-		logic_update_time = 1000;
+		logic_update_time = 100;
 		life_time = 2000;
-		heat = 10000;
+		heat = 400;
 		heat_dispersion_rate = 1;
 	}
 	
@@ -39,7 +39,11 @@ public class Fire extends Particle{
 	}
 	
 	public void randomSpawn() {
-		spawn = Math.random() < spawn_chance;
+		if(heat >= 300) {
+			spawn = Math.random() < spawn_chance;
+		}else {
+			spawn = false;
+		}
 	}
 	
 	public void logic(World world, int w, int h) {
