@@ -1,5 +1,6 @@
 package particles.world;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 
 import particles.utils.UniversalTime;
@@ -101,11 +102,13 @@ public class World {
 	}
 	
 	public void draw(Graphics2D g2) {
+		g2.setColor(Color.WHITE);
+		g2.drawRect(spacing*world_scale, spacing*world_scale, ((width-spacing)*world_scale)-(spacing*world_scale), ((height-spacing)*world_scale)-(spacing*world_scale));
 		for(int w = 0; w < width; w++) {
 			for(int h = 0; h < height; h++) {
 				if(spotOccupiedAndInBounds(w,h)) {
 					g2.setColor(particles[w][h].getColor());
-					g2.fillRect(w*world_scale, h*world_scale, world_scale, world_scale);
+					g2.fillRect(w*world_scale, h*world_scale, world_scale+1, world_scale+1);
 				}
 			}
 		}
