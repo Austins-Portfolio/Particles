@@ -6,7 +6,7 @@ import particles.world.particles.ParticleTypes;
 
 public class Smoke extends Particle{
 	
-	public Smoke() {
+	public void init() {
 		type = ParticleTypes.SMOKE;
 		color = color.DARK_GRAY;
 		solid = false;

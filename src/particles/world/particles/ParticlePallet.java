@@ -3,6 +3,7 @@ package particles.world.particles;
 import particles.world.particles.solids.*;
 import particles.world.particles.liquids.*;
 import particles.world.particles.gases.*;
+import particles.world.particles.special.*;
 
 public class ParticlePallet {
 
@@ -26,6 +27,9 @@ public class ParticlePallet {
 			case 4:{
 				return new Fire();
 			}
+			case 5:{
+				return new VoidParticle();
+			}
 		};
 		
 		return null;
@@ -45,6 +49,9 @@ public class ParticlePallet {
 		case 4:{
 			return new WaterVapor();
 		}
+		case 5:{
+			return new SpawnerParticle();
+		}
 	};
 		
 		return null;
@@ -63,6 +70,9 @@ public class ParticlePallet {
 			}
 			case 4:{
 				return "[Fire,WaterVapor]";
+			}
+			case 5:{
+				return "[Void,Spawner]";
 			}
 		};
 		return "";

@@ -9,7 +9,7 @@ import particles.world.particles.liquids.Lava;
 
 public class Rock extends Particle{
 	
-	public Rock() {
+	public void init() {
 		type = ParticleTypes.WALL;
 		color = Color.GRAY;
 		logic = true;

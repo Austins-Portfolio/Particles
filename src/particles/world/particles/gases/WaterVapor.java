@@ -9,8 +9,8 @@ import particles.world.particles.liquids.Water;
 
 public class WaterVapor extends Particle{
 	
-	public WaterVapor() {
-		type = ParticleTypes.WATER;
+	public void init() {
+		type = ParticleTypes.WATERVAPOR;
 		color = new Color(56, 196, 240);
 		solid = false;
 		liquid = false;

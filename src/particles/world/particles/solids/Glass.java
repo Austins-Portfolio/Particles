@@ -6,7 +6,7 @@ import particles.world.particles.ParticleTypes;
 
 public class Glass extends Particle{
 	
-	public Glass() {
+	public void init() {
 		type = ParticleTypes.GLASS;
 		color = new Color(0.25f,0.25f,0.25f,1);
 		non_insulator = true;

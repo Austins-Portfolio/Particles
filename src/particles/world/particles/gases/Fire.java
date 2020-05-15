@@ -13,7 +13,8 @@ public class Fire extends Particle{
 	private long spawn_time = 100;
 	private double spawn_chance = 0.5;
 	
-	public Fire() {
+	public void init() {
+		particle_class = this.getClass();
 		type = ParticleTypes.FIRE;
 		color = new Color(240,89,56);
 		solid = false;

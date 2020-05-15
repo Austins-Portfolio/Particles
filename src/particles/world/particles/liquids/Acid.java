@@ -6,7 +6,8 @@ import particles.world.particles.ParticleTypes;
 
 public class Acid extends Particle{
 	
-	public Acid() {
+	public void init() {
+		particle_class = this.getClass();
 		type = ParticleTypes.ACID;
 		color = color.GREEN;
 		solid = false;
@@ -44,7 +45,7 @@ public class Acid extends Particle{
 	}
 	
 	public boolean canDisolve(byte type) {
-		if(type!=ParticleTypes.ACID && type!=ParticleTypes.GLASS) {
+		if(type!=ParticleTypes.ACID && type!=ParticleTypes.GLASS && type!=ParticleTypes.VOID && type!=ParticleTypes.SPAWNER) {
 			return true;
 		}
 		return false;

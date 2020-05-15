@@ -2,11 +2,13 @@ package particles.world.particles;
 
 import java.awt.Color;
 
+import particles.utils.UniversalTime;
 import particles.world.World;
 
-public abstract class Particle {
+public abstract class Particle{
 
 	protected byte type;
+	protected Class<?> particle_class;
 	protected Color color;
 	protected boolean solid = false, liquid = false, gas = false, non_insulator = false, logic = false, lifetime = false;
 	
@@ -22,12 +24,21 @@ public abstract class Particle {
 	private long logic_last_time = System.currentTimeMillis();
 	protected long logic_update_time = 10;
 	
-	protected long birth_time = System.currentTimeMillis();
+	protected long birth_time = UniversalTime.getTime();
 	protected long life_time = 3000;
 	
 	protected int tempW, tempH;
 	
 	protected boolean i;	
+	
+	public Particle() {
+		init();
+	}
+	
+	public void init() {
+		
+	}
+	
 	public void generateI() {
 		i = Math.random() < 0.5;
 	}
@@ -49,7 +60,7 @@ public abstract class Particle {
 	}
 	
 	public boolean lifetimeUp() {
-		if(System.currentTimeMillis() - birth_time >= life_time) {
+		if(UniversalTime.getTime() - birth_time >= life_time) {
 			return true;
 		}
 		return false;
@@ -433,6 +444,15 @@ public abstract class Particle {
 
 	public void setI(boolean i) {
 		this.i = i;
+	}
+	
+	public Particle clone() {
+		try {
+			return (Particle) Class.forName(particle_class.getName()).getConstructor().newInstance();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 }

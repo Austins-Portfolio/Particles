@@ -13,7 +13,7 @@ public class Lava extends Particle{
 	private long spawn_time = 300;
 	private double spawn_chance = 0.04;
 	
-	public Lava() {
+	public void init() {
 		type = ParticleTypes.LAVA;
 		color = color.ORANGE;
 		solid = false;

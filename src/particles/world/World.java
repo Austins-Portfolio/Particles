@@ -2,6 +2,7 @@ package particles.world;
 
 import java.awt.Graphics2D;
 
+import particles.utils.UniversalTime;
 import particles.world.particles.Particle;
 
 public class World {
@@ -10,6 +11,7 @@ public class World {
 	public Particle[][] particles;
 	private int spacing = 10;
 	private int update_steps = 1;
+	private boolean should_update = true;
 	
 	public World(int width, int height, int world_scale) {
 		this.width = width/world_scale;
@@ -84,6 +86,7 @@ public class World {
 	}
 	
 	public void update() {
+		if(should_update) {
 		for(int i = 0; i < update_steps; i++) {
 			for(int h = height-1; h > 0; h--) {
 				for(int w = 0; w < width; w++) {
@@ -93,6 +96,8 @@ public class World {
 				}
 			}
 		}
+		}
+		UniversalTime.tickTime();
 	}
 	
 	public void draw(Graphics2D g2) {
@@ -117,6 +122,13 @@ public class World {
 		return world_scale;
 	}
 	
-	
+	public void flipShould_Update() {
+		should_update = !should_update;
+		if(should_update) {
+			UniversalTime.unpause();
+		}else {
+			UniversalTime.pause();
+		}
+	}
 	
 }
