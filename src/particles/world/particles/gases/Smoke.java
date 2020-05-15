@@ -19,6 +19,7 @@ public class Smoke extends Particle{
 		life_time = 2000;
 		heat = 30;
 		heat_dispersion_rate = 0.75;
+		particle_class = this.getClass();
 	}
 	
 	public void lifetime(World world, int w, int h) {

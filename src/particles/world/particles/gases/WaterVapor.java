@@ -22,6 +22,7 @@ public class WaterVapor extends Particle{
 		heat_correction_value = 0.0000000001;
 		logic = true;
 		update_time = 50;
+		particle_class = this.getClass();
 	}
 	
 	public void logic(World world, int w, int h) {

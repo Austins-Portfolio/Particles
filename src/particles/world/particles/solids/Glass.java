@@ -11,6 +11,7 @@ public class Glass extends Particle{
 		color = new Color(0.25f,0.25f,0.25f,1);
 		non_insulator = true;
 		heat_dispersion_rate = 0.25;
+		particle_class = this.getClass();
 	}
 
 }

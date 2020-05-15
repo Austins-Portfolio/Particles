@@ -19,6 +19,7 @@ public class Water extends Particle{
 		heat_dispersion_rate = 0.5;
 		update_time = 10;
 		logic = true;
+		particle_class = this.getClass();
 	}
 	
 	public void logic(World world, int w, int h) {

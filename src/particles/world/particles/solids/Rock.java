@@ -19,6 +19,7 @@ public class Rock extends Particle{
 		logic_update_time = 100;
 		non_insulator = true;
 		heat_dispersion_rate = 0.00001;
+		particle_class = this.getClass();
 	}
 	
 	public void logic(World world, int w, int h) {

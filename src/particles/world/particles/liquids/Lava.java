@@ -28,6 +28,7 @@ public class Lava extends Particle{
 		update_time = 50;
 		logic_update_time = 1000;
 		spawn_time += Math.random()*1000;
+		particle_class = this.getClass();
 	}
 	
 	private boolean hot = true;

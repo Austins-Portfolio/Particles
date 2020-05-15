@@ -14,7 +14,6 @@ public class Fire extends Particle{
 	private double spawn_chance = 0.5;
 	
 	public void init() {
-		particle_class = this.getClass();
 		type = ParticleTypes.FIRE;
 		color = new Color(240,89,56);
 		solid = false;
@@ -28,6 +27,7 @@ public class Fire extends Particle{
 		life_time = 2000;
 		heat = 400;
 		heat_dispersion_rate = 1;
+		particle_class = this.getClass();
 	}
 	
 	public boolean shouldSpawnSmoke() {

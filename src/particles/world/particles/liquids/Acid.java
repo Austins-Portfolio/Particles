@@ -15,6 +15,7 @@ public class Acid extends Particle{
 		gas = false;
 		logic = true;
 		logic_update_time = 100;
+		particle_class = this.getClass();
 	}
 
 	public void logic(World world, int w, int h) {
