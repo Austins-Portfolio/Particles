@@ -16,6 +16,7 @@ public class Mouse implements MouseListener{
 	public MouseMotion mouseMotion;
 	public MouseWheel mouseWheel;
 	private boolean leftdown = false,rightdown = false, middledown = false;
+	private boolean drawMouse = true;
 	private int mouseSize = 10;
 	private ParticlePallet particlePallet;
 	
@@ -88,12 +89,12 @@ public class Mouse implements MouseListener{
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		
+		drawMouse = true;
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		
+		drawMouse = false;
 	}
 	
 	public void mouseSizeNotch(int notch) {
@@ -111,8 +112,10 @@ public class Mouse implements MouseListener{
 	}
 	
 	public void drawMouse(Graphics2D g2) {
-		g2.setColor(Color.WHITE);
-		g2.drawRect(mouseMotion.x-mouseSize/2, mouseMotion.y-mouseSize/2, mouseSize, mouseSize);
+		if(drawMouse) {
+			g2.setColor(Color.WHITE);
+			g2.drawRect(mouseMotion.x-mouseSize/2, mouseMotion.y-mouseSize/2, mouseSize, mouseSize);
+		}
 	}
 
 }

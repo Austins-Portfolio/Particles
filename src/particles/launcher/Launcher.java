@@ -12,7 +12,7 @@ import particles.world.particles.ParticlePallet;
 public class Launcher {
 	
 	public static void main(String[] args) {
-		Window window = new Window(1280,900,"Particles");
+		Window window = new Window(1280,720,"Particles");
 		World world = new World(window.getWidth(), window.getHeight(),8);
 		ParticlePallet pp = new ParticlePallet();
 		Mouse mouse = new Mouse(world, pp);
@@ -59,7 +59,7 @@ public class Launcher {
 				count++;
 				if(count >= average_amount) {
 					averagetime /= count;
-					window.getFrame().setTitle(window.getName()+" FPS:"+1000/(averagetime+1)+" Selection:"+pp.getSelectionAsString());
+					//window.getFrame().setTitle(window.getName()+" FPS:"+1000/(averagetime+1)+" Selection:"+pp.getSelectionAsString());
 					averagetime = 0;
 					count = 0;
 				}
