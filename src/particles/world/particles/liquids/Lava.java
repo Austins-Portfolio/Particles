@@ -32,7 +32,6 @@ public class Lava extends Particle{
 		particle_class = this.getClass();
 	}
 	
-	private boolean hot = true;
 	public void logic(World world, int w, int h) {
 		spawnFire(world, w, h);
 		freeze(world, w, h);
