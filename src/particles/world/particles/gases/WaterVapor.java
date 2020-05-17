@@ -24,7 +24,7 @@ public class WaterVapor extends Particle{
 		heat_correction_value = 0.0000000001;
 		logic = true;
 		update_time = 50;
-		density = 1;
+		density = 0.25;
 		particle_class = this.getClass();
 	}
 	
