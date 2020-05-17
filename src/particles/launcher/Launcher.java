@@ -59,7 +59,7 @@ public class Launcher {
 				count++;
 				if(count >= average_amount) {
 					averagetime /= count;
-					//window.getFrame().setTitle(window.getName()+" FPS:"+1000/(averagetime+1)+" Selection:"+pp.getSelectionAsString());
+					window.getFrame().setTitle(window.getName()+" FPS:"+1000/(averagetime+1)+" Selection:"+pp.getSelectionAsString());
 					averagetime = 0;
 					count = 0;
 				}
