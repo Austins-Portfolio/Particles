@@ -13,7 +13,6 @@ public class Rock extends Particle{
 		type = ParticleTypes.WALL;
 		color = Color.GRAY;
 		logic = true;
-		heat_dispersion_rate = 0.0001f;
 		melting_point = 1300;
 		update_time = 100;
 		logic_update_time = 100;

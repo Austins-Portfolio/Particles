@@ -13,6 +13,7 @@ public class World {
 	private int spacing = 10;
 	private int update_steps = 1;
 	private boolean should_update = true;
+	public int particle_count = 0;
 	
 	public World(int width, int height, int world_scale) {
 		this.width = width/world_scale;
@@ -88,15 +89,18 @@ public class World {
 	
 	public void update() {
 		if(should_update) {
+		int count = 0;
 		for(int i = 0; i < update_steps; i++) {
 			for(int h = height-1; h > 0; h--) {
 				for(int w = 0; w < width; w++) {
 					if(spotOccupiedAndInBounds(w,h)) {
 						particles[w][h].update(this, w, h);
+						count++;
 					}
 				}
 			}
 		}
+		particle_count=count;
 		}
 		UniversalTime.tickTime();
 	}

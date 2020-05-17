@@ -5,7 +5,9 @@ import java.awt.Color;
 import particles.world.World;
 import particles.world.particles.Particle;
 import particles.world.particles.ParticleTypes;
+import particles.world.particles.liquids.Acid;
 import particles.world.particles.liquids.Water;
+import particles.world.particles.solids.Rock;
 
 public class WaterVapor extends Particle{
 	
@@ -22,6 +24,7 @@ public class WaterVapor extends Particle{
 		heat_correction_value = 0.0000000001;
 		logic = true;
 		update_time = 50;
+		density = 1;
 		particle_class = this.getClass();
 	}
 	

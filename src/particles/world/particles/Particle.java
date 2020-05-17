@@ -11,6 +11,8 @@ public abstract class Particle{
 	protected Class<?> particle_class;
 	protected Color color;
 	protected boolean solid = false, liquid = false, gas = false, non_insulator = false, logic = false, lifetime = false;
+	protected double density = 1;
+	protected boolean canSwap = true;
 	
 	protected double heat = 68;
 	protected double freezing_point;
@@ -27,7 +29,7 @@ public abstract class Particle{
 	protected long birth_time = UniversalTime.getTime();
 	protected long life_time = 3000;
 	
-	protected int tempW, tempH;
+	protected int tempW = 0, tempH = 0;
 	
 	protected boolean i;	
 	
@@ -138,16 +140,46 @@ public abstract class Particle{
 					generateI();
 				}
 			}
-		}if(world.spotOccupiedAndInBounds(w, h+1)) {
+		}
+		if(world.spotOccupiedAndInBounds(w, h+1)&&canSwap) {
+			if(world.getParticle(w, h+1).isLiquid()){
+				if(world.getParticle(w, h+1).getDensity() < density) {
+					world.addParticle(w, h, world.getParticle(w, h+1));
+					world.addParticle(w, h+1, this);
+					h++;
+					generateI();
+					canSwap = !canSwap;
+				}
+			}else
 			if(world.getParticle(w, h+1).isGas()) {
 				world.addParticle(w, h, world.getParticle(w, h+1));
 				world.addParticle(w, h+1, this);
 				h++;
 				generateI();
+				canSwap = !canSwap;
+			}
+		}else if(world.spotOccupiedAndInBounds(w+1, h+1)&&canSwap) {
+			if(world.getParticle(w+1, h+1).isLiquid()){
+				if(world.getParticle(w+1, h+1).getDensity() < density) {
+					world.addParticle(w, h, world.getParticle(w+1, h+1));
+					world.addParticle(w+1, h+1, this);
+					w++;
+					h++;
+					generateI();
+					canSwap = !canSwap;
+				}
+			}else
+			if(world.getParticle(w+1, h+1).isGas()) {
+				world.addParticle(w, h, world.getParticle(w+1, h+1));
+				world.addParticle(w+1, h+1, this);
+				w++;
+				h++;
+				generateI();
+				canSwap = !canSwap;
 			}
 		}
 		
-		updateWH(w, h);
+		particleDensity(world, w, h);
 	}
 	
 	public void moveGas(World world, int w, int h) {
@@ -195,6 +227,72 @@ public abstract class Particle{
 				}
 			}
 		
+		particleDensity(world, w, h);
+	}
+	
+	public void particleDensity(World world, int w, int h) {
+		if(world.spotOccupiedAndInBounds(w, h-1)&&canSwap) {
+			if(world.getParticle(w, h-1).isLiquid()&&world.getParticle(w, h-1).getType()!=type){
+				if(world.getParticle(w, h-1).getDensity() < density) {
+					world.addParticle(w, h, world.getParticle(w, h-1));
+					world.addParticle(w, h-1, this);
+					h--;
+					generateI();
+					canSwap = !canSwap;
+				}
+			}else if(world.getParticle(w, h-1).isGas()&&world.getParticle(w, h-1).getType()!=type) {
+				if(world.getParticle(w, h-1).getDensity() < density) {
+					world.addParticle(w, h, world.getParticle(w, h-1));
+					world.addParticle(w, h-1, this);
+					h--;
+					generateI();
+					canSwap = !canSwap;
+				}
+			}
+		}
+		if(world.spotOccupiedAndInBounds(w+1, h-1)&&canSwap) {
+			if(world.getParticle(w+1, h-1).isLiquid()&&world.getParticle(w+1, h-1).getType()!=type){
+				if(world.getParticle(w+1, h-1).getDensity() < density) {
+					world.addParticle(w, h, world.getParticle(w+1, h-1));
+					world.addParticle(w+1, h-1, this);
+					w++;
+					h--;
+					generateI();
+					canSwap = !canSwap;
+				}
+			}else if(world.getParticle(w+1, h-1).isGas()&&world.getParticle(w+1, h-1).getType()!=type) {
+				if(world.getParticle(w+1, h-1).getDensity() < density) {
+					world.addParticle(w, h, world.getParticle(w+1, h-1));
+					world.addParticle(w+1, h-1, this);
+					w++;
+					h--;
+					generateI();
+					canSwap = !canSwap;
+				}
+			}
+		}
+		if(world.spotOccupiedAndInBounds(w-1, h-1)&&canSwap) {
+			if(world.getParticle(w-1, h-1).isLiquid()&&world.getParticle(w-1, h-1).getType()!=type){
+				if(world.getParticle(w-1, h-1).getDensity() < density) {
+					world.addParticle(w, h, world.getParticle(w-1, h-1));
+					world.addParticle(w-1, h-1, this);
+					w--;
+					h--;
+					generateI();
+					canSwap = !canSwap;
+				}
+			}else if(world.getParticle(w-1, h-1).isGas()&&world.getParticle(w-1, h-1).getType()!=type) {
+				if(world.getParticle(w-1, h-1).getDensity() < density) {
+					world.addParticle(w, h, world.getParticle(w-1, h-1));
+					world.addParticle(w-1, h-1, this);
+					w--;
+					h--;
+					generateI();
+					canSwap = !canSwap;
+				}
+			}
+		}
+		canSwap = !canSwap;
 		updateWH(w, h);
 	}
 	
@@ -341,6 +439,14 @@ public abstract class Particle{
 	public void setLifetime(boolean lifetime) {
 		this.lifetime = lifetime;
 	}
+	
+	public double getDensity() {
+		return density;
+	}
+
+	public void setDensity(double density) {
+		this.density = density;
+	}
 
 	public double getHeat() {
 		return heat;
@@ -372,6 +478,14 @@ public abstract class Particle{
 
 	public void setHeat_dispersion_rate(double heat_dispersion_rate) {
 		this.heat_dispersion_rate = heat_dispersion_rate;
+	}
+	
+	public double getHeat_correction_value() {
+		return heat_correction_value;
+	}
+
+	public void setHeat_correction_value(double heat_correction_value) {
+		this.heat_correction_value = heat_correction_value;
 	}
 
 	public long getLast_time() {
@@ -446,6 +560,14 @@ public abstract class Particle{
 		this.i = i;
 	}
 	
+	public Class<?> getParticle_class() {
+		return particle_class;
+	}
+
+	public void setParticle_class(Class<?> particle_class) {
+		this.particle_class = particle_class;
+	}
+
 	public Particle clone() {
 		try {
 			return (Particle) Class.forName(particle_class.getName()).getConstructor().newInstance();
@@ -454,5 +576,5 @@ public abstract class Particle{
 		}
 		return null;
 	}
-	
+
 }
