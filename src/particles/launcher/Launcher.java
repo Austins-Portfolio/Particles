@@ -5,7 +5,6 @@ import particles.graphics.Window;
 import particles.input.Keys;
 import particles.input.Mouse;
 import particles.utils.Clock;
-import particles.utils.UniversalTime;
 import particles.world.World;
 import particles.world.particles.ParticlePallet;
 
@@ -13,7 +12,7 @@ public class Launcher {
 	
 	public static void main(String[] args) {
 		Window window = new Window(1280,720,"Particles");
-		World world = new World(window.getWidth(), window.getHeight(),8);
+		World world = new World(window.getWidth(), window.getHeight(), 8);
 		ParticlePallet pp = new ParticlePallet();
 		Mouse mouse = new Mouse(world, pp);
 		Keys keys = new Keys(world,pp);
