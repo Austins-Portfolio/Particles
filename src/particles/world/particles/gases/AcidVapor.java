@@ -13,7 +13,7 @@ public class AcidVapor extends Particle{
 		solid = false;
 		liquid = false;
 		gas = true;
-		logic = false;
+		logic = true;
 		logic_update_time = 100;
 		update_time = 50;
 		density = 2;
