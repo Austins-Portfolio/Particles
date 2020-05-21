@@ -13,6 +13,7 @@ public class World {
 	private int spacing = 10;
 	private int update_steps = 1;
 	private boolean should_update = true;
+	private boolean updating = false;
 	public int particle_count = 0;
 	
 	public World(int width, int height, int world_scale) {
@@ -48,7 +49,9 @@ public class World {
 	public void addParticleMouseNoSafety(int w, int h, Particle particle) {
 		if(w/world_scale < width-spacing && h/world_scale < height-spacing) {
 			if(w/world_scale >= 0+spacing && h/world_scale >= 0+spacing) {
+				if(!updating) {
 					particles[w/world_scale][h/world_scale] = particle;
+				}
 			}
 		}
 	}
@@ -90,6 +93,7 @@ public class World {
 	public void update() {
 		if(should_update) {
 		int count = 0;
+		updating = true;
 		for(int i = 0; i < update_steps; i++) {
 			for(int h = height-1; h > 0; h--) {
 				for(int w = 0; w < width; w++) {
@@ -100,6 +104,7 @@ public class World {
 				}
 			}
 		}
+		updating = false;
 		particle_count=count;
 		}
 		UniversalTime.tickTime();
