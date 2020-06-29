@@ -14,7 +14,7 @@ public class Oil extends Particle{
 		liquid = true;
 		gas = false;
 		non_insulator = true;
-		melting_point = 600;
+		melting_point = 300;
 		freezing_point = 32;
 		heat_dispersion_rate = 1;
 		density = 2;
