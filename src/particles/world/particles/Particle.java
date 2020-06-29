@@ -121,7 +121,7 @@ public abstract class Particle{
 					w++;
 					}
 				}else {
-						generateI();
+					generateI();
 				}
 				if(world.spotEmptyAndInBounds(w-1, h+1)){
 					if(!i) {

@@ -14,6 +14,7 @@ public class VoidParticle extends Particle{
 		update_time = 100;
 		logic_update_time = 100;
 		logic = true;
+		particle_class = this.getClass();
 	}
 	
 	public void logic(World world, int w, int h) {

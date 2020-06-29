@@ -19,6 +19,7 @@ public class SpawnerParticle extends Particle{
 		logic_update_time = 10;
 		logic = true;
 		non_insulator = true;
+		particle_class = this.getClass();
 	}
 	
 	public void logic(World world, int w, int h) {
