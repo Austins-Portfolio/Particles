@@ -2,14 +2,19 @@ package particles.world.particles;
 
 import particles.world.particles.solids.*;
 import particles.world.particles.liquids.*;
+import particles.world.World;
 import particles.world.particles.gases.*;
 import particles.world.particles.special.*;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 
@@ -21,9 +26,9 @@ public class ParticlePallet {
 	private String name_2;
 	public int selection = 1;
 	
-	public void buildPallet(JFrame frame) {
+	public void buildPallet(JFrame frame, World world) {
 		frame.setResizable(false);
-		frame.setLayout(new FlowLayout(1,10,10));
+		frame.setLayout(new GridLayout());
 		
 		SelectionItem water = new SelectionItem("Water", new Water());
 		SelectionItem watervapor = new SelectionItem("Water Vapor", new WaterVapor());
@@ -45,6 +50,7 @@ public class ParticlePallet {
 		JComboBox<SelectionItem> comboBox = new JComboBox<SelectionItem>(list);
 		
 		comboBox.setMaximumSize(new Dimension(100,50));
+		comboBox.setMinimumSize(new Dimension(100,50));
 		comboBox.setVisible(true);
 		
 		comboBox.addItemListener(new ItemListener() {
@@ -62,6 +68,7 @@ public class ParticlePallet {
 		JComboBox<SelectionItem> comboBox2 = new JComboBox<SelectionItem>(list);
 		
 		comboBox2.setMaximumSize(new Dimension(100,50));
+		comboBox2.setMinimumSize(new Dimension(100,50));
 		comboBox2.setVisible(true);
 		
 		comboBox2.addItemListener(new ItemListener() {
@@ -86,6 +93,35 @@ public class ParticlePallet {
 		name_1 = water.getName();
 		particle_class_2 = lava.getParticle().getParticle_class();
 		name_2 = lava.getName();
+		
+		JButton clearButton = new JButton("Clear");
+		clearButton.setMaximumSize(new Dimension(100,50));
+		clearButton.setMinimumSize(new Dimension(100,50));
+		clearButton.setVisible(true);
+		clearButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				world.clear();
+			}
+		
+		});
+		
+		JButton voidButton = new JButton("Void Border");
+		voidButton.setMaximumSize(new Dimension(100,50));
+		voidButton.setMinimumSize(new Dimension(100,50));
+		voidButton.setVisible(true);
+		voidButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				world.voidBorder();
+			}
+		
+		});
+		
+		frame.add(clearButton);
+		frame.add(voidButton);
 		
 		frame.validate();
 	}

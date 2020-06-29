@@ -12,10 +12,10 @@ public class Launcher {
 	
 	public static void main(String[] args) {
 		Window window = new Window(1280,720,"Particles");
-		Window window2 = new Window(300, 100, "Particle Pallet");
+		Window window2 = new Window(400, 100, "Particle Pallet");
 		World world = new World(window.getWidth(), window.getHeight(), 6);
 		ParticlePallet pp = new ParticlePallet();
-		pp.buildPallet(window2.getFrame());
+		pp.buildPallet(window2.getFrame(), world);
 		Mouse mouse = new Mouse(world, pp);
 		Keys keys = new Keys(world,pp);
 		window.getFrame().addMouseListener(mouse);

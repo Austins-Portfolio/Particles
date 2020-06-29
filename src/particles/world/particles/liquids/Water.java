@@ -33,7 +33,7 @@ public class Water extends Particle{
 	public void vaporize(World world, int w, int h) {
 		if(heat >= melting_point) {
 			WaterVapor water_vapor = new WaterVapor();
-			water_vapor.setHeat(heat);
+			water_vapor.setHeat(heat-20);
 			world.addParticle(w, h, water_vapor);
 		}
 	}

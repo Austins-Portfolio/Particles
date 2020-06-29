@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 
 import particles.utils.UniversalTime;
 import particles.world.particles.Particle;
+import particles.world.particles.special.VoidParticle;
 
 public class World {
 
@@ -53,6 +54,26 @@ public class World {
 					particles[w/world_scale][h/world_scale] = particle;
 				}
 			}
+		}
+	}
+	
+	public void clear() {
+		for(int h = height-1; h > 0; h--) {
+			for(int w = 0; w < width; w++) {
+				particles[w][h] = null;
+			}
+		}
+	}
+	
+	public void voidBorder() {
+		for(int w = spacing; w < width-spacing; w++) {
+			particles[w][spacing] = new VoidParticle();
+			particles[w][height-1-spacing] = new VoidParticle();
+		}
+		
+		for(int h = spacing; h < height-spacing; h++) {
+			particles[spacing][h] = new VoidParticle();
+			particles[width-1-spacing][h] = new VoidParticle();
 		}
 	}
 	
