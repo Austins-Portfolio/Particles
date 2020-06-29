@@ -4,6 +4,9 @@ import particles.world.particles.solids.*;
 import particles.world.particles.liquids.*;
 import particles.world.particles.gases.*;
 import particles.world.particles.special.*;
+
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -20,9 +23,10 @@ public class ParticlePallet {
 	
 	public void buildPallet(JFrame frame) {
 		frame.setResizable(false);
-		frame.setLayout(new GridLayout(2,1));
+		frame.setLayout(new FlowLayout(1,10,10));
 		
 		SelectionItem water = new SelectionItem("Water", new Water());
+		SelectionItem watervapor = new SelectionItem("Water Vapor", new WaterVapor());
 		SelectionItem lava = new SelectionItem("Lava", new Lava());
 		SelectionItem wall = new SelectionItem("Wall", new Wall());
 		SelectionItem rock = new SelectionItem("Rock", new Rock());
@@ -34,10 +38,11 @@ public class ParticlePallet {
 		SelectionItem spawnerparticle = new SelectionItem("Spawner", new SpawnerParticle());
 		SelectionItem voidparticle = new SelectionItem("Void" , new VoidParticle());
 		
-		SelectionItem[] list = {water,lava,wall,rock,acid,glass,fire,smoke,plasma,spawnerparticle,voidparticle};
+		SelectionItem[] list = {water,watervapor,lava,wall,rock,acid,glass,fire,smoke,plasma,spawnerparticle,voidparticle};
 		
 		JComboBox<SelectionItem> comboBox = new JComboBox<SelectionItem>(list);
 		
+		comboBox.setMaximumSize(new Dimension(100,50));
 		comboBox.setVisible(true);
 		
 		comboBox.addItemListener(new ItemListener() {
@@ -54,6 +59,7 @@ public class ParticlePallet {
 		
 		JComboBox<SelectionItem> comboBox2 = new JComboBox<SelectionItem>(list);
 		
+		comboBox2.setMaximumSize(new Dimension(100,50));
 		comboBox2.setVisible(true);
 		
 		comboBox2.addItemListener(new ItemListener() {
