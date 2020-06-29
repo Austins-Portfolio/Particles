@@ -12,8 +12,6 @@ public abstract class Particle{
 	protected Color color;
 	protected boolean solid = false, liquid = false, gas = false, non_insulator = false, logic = false, lifetime = false;
 	protected double density = 1;
-	protected boolean canSwap = true;
-	
 	protected double heat = 68;
 	protected double freezing_point;
 	protected double melting_point;
@@ -194,123 +192,74 @@ public abstract class Particle{
 		particleDensityUp(world, w, h);
 	}
 	
-	public void particleDensityDown(World world, int w, int h) {
-		if(world.spotOccupiedAndInBounds(w, h+1)&&canSwap) {
-			if(world.getParticle(w, h+1).isLiquid()){
-				if(world.getParticle(w, h+1).getDensity() < density) {
-					world.addParticle(w, h, world.getParticle(w, h+1));
-					world.addParticle(w, h+1, this);
-					h++;
-					generateI();
-					canSwap = !canSwap;
-				}
-			}else
-			if(world.getParticle(w, h+1).isGas()) {
-				world.addParticle(w, h, world.getParticle(w, h+1));
-				world.addParticle(w, h+1, this);
-				h++;
-				generateI();
-				canSwap = !canSwap;
-			}
-		}else if(world.spotOccupiedAndInBounds(w+1, h+1)&&canSwap) {
-			if(world.getParticle(w+1, h+1).isLiquid()){
-				if(world.getParticle(w+1, h+1).getDensity() < density) {
-					world.addParticle(w, h, world.getParticle(w+1, h+1));
-					world.addParticle(w+1, h+1, this);
-					w++;
-					h++;
-					generateI();
-					canSwap = !canSwap;
-				}
-			}else
-			if(world.getParticle(w+1, h+1).isGas()) {
-				world.addParticle(w, h, world.getParticle(w+1, h+1));
-				world.addParticle(w+1, h+1, this);
-				w++;
-				h++;
-				generateI();
-				canSwap = !canSwap;
-			}
-		}
-		
-		if(world.spotOccupiedAndInBounds(w, h+1)&&canSwap) {
+	public void particleDensityDown(World world, int w, int h) {	
+		if(world.spotOccupiedAndInBounds(w, h+1)) {
 			if(world.getParticle(w, h+1).isLiquid()&&world.getParticle(w, h+1).getType()!=type){
 				if(world.getParticle(w, h+1).getDensity() < density) {
 					world.addParticle(w, h, world.getParticle(w, h+1));
 					world.addParticle(w, h+1, this);
-					h--;
+					h++;
 					generateI();
-					canSwap = !canSwap;
 				}
 			}else if(world.getParticle(w, h+1).isGas()&&world.getParticle(w, h+1).getType()!=type) {
 				if(world.getParticle(w, h+1).getDensity() < density) {
 					world.addParticle(w, h, world.getParticle(w, h+1));
 					world.addParticle(w, h+1, this);
-					h--;
+					h++;
 					generateI();
-					canSwap = !canSwap;
 				}
 			}
-		}
-		if(world.spotOccupiedAndInBounds(w+1, h+1)&&canSwap) {
+		}else
+		if(world.spotOccupiedAndInBounds(w+1, h+1)) {
 			if(world.getParticle(w+1, h+1).isLiquid()&&world.getParticle(w+1, h+1).getType()!=type){
 				if(world.getParticle(w+1, h+1).getDensity() < density) {
 					world.addParticle(w, h, world.getParticle(w+1, h+1));
 					world.addParticle(w+1, h+1, this);
 					w++;
-					h--;
+					h++;
 					generateI();
-					canSwap = !canSwap;
 				}
 			}else if(world.getParticle(w+1, h+1).isGas()&&world.getParticle(w+1, h+1).getType()!=type) {
 				if(world.getParticle(w+1, h+1).getDensity() < density) {
 					world.addParticle(w, h, world.getParticle(w+1, h+1));
 					world.addParticle(w+1, h+1, this);
 					w++;
-					h--;
+					h++;
 					generateI();
-					canSwap = !canSwap;
 				}
 			}
-		}
-		if(world.spotOccupiedAndInBounds(w-1, h+1)&&canSwap) {
+		}else
+		if(world.spotOccupiedAndInBounds(w-1, h+1)) {
 			if(world.getParticle(w-1, h+1).isLiquid()&&world.getParticle(w-1, h+1).getType()!=type){
 				if(world.getParticle(w-1, h+1).getDensity() < density) {
 					world.addParticle(w, h, world.getParticle(w-1, h+1));
 					world.addParticle(w-1, h+1, this);
 					w--;
-					h--;
+					h++;
 					generateI();
-					canSwap = !canSwap;
 				}
 			}else if(world.getParticle(w-1, h+1).isGas()&&world.getParticle(w-1, h+1).getType()!=type) {
 				if(world.getParticle(w-1, h+1).getDensity() < density) {
 					world.addParticle(w, h, world.getParticle(w-1, h+1));
 					world.addParticle(w-1, h+1, this);
 					w--;
-					h--;
+					h++;
 					generateI();
-					canSwap = !canSwap;
 				}
 			}
 		}
-		canSwap = !canSwap;
+		
 		updateWH(w, h);
 	}
 	
-	public void particleDensityUp2(World world, int w, int h) {
-		
-	}
-	
 	public void particleDensityUp(World world, int w, int h) {
-		if(world.spotOccupiedAndInBounds(w, h-1)&&canSwap) {
+		if(world.spotOccupiedAndInBounds(w, h-1)) {
 			if(world.getParticle(w, h-1).isLiquid()&&world.getParticle(w, h-1).getType()!=type){
 				if(world.getParticle(w, h-1).getDensity() > density) {
 					world.addParticle(w, h, world.getParticle(w, h-1));
 					world.addParticle(w, h-1, this);
 					h--;
 					generateI();
-					canSwap = !canSwap;
 				}
 			}else if(world.getParticle(w, h-1).isGas()&&world.getParticle(w, h-1).getType()!=type) {
 				if(world.getParticle(w, h-1).getDensity() > density) {
@@ -318,11 +267,10 @@ public abstract class Particle{
 					world.addParticle(w, h-1, this);
 					h--;
 					generateI();
-					canSwap = !canSwap;
 				}
 			}
-		}
-		if(world.spotOccupiedAndInBounds(w+1, h-1)&&canSwap) {
+		}else
+		if(world.spotOccupiedAndInBounds(w+1, h-1)) {
 			if(world.getParticle(w+1, h-1).isLiquid()&&world.getParticle(w+1, h-1).getType()!=type){
 				if(world.getParticle(w+1, h-1).getDensity() > density) {
 					world.addParticle(w, h, world.getParticle(w+1, h-1));
@@ -330,7 +278,6 @@ public abstract class Particle{
 					w++;
 					h--;
 					generateI();
-					canSwap = !canSwap;
 				}
 			}else if(world.getParticle(w+1, h-1).isGas()&&world.getParticle(w+1, h-1).getType()!=type) {
 				if(world.getParticle(w+1, h-1).getDensity() > density) {
@@ -339,11 +286,10 @@ public abstract class Particle{
 					w++;
 					h--;
 					generateI();
-					canSwap = !canSwap;
 				}
 			}
-		}
-		if(world.spotOccupiedAndInBounds(w-1, h-1)&&canSwap) {
+		}else
+		if(world.spotOccupiedAndInBounds(w-1, h-1)) {
 			if(world.getParticle(w-1, h-1).isLiquid()&&world.getParticle(w-1, h-1).getType()!=type){
 				if(world.getParticle(w-1, h-1).getDensity() > density) {
 					world.addParticle(w, h, world.getParticle(w-1, h-1));
@@ -351,7 +297,6 @@ public abstract class Particle{
 					w--;
 					h--;
 					generateI();
-					canSwap = !canSwap;
 				}
 			}else if(world.getParticle(w-1, h-1).isGas()&&world.getParticle(w-1, h-1).getType()!=type) {
 				if(world.getParticle(w-1, h-1).getDensity() > density) {
@@ -360,11 +305,9 @@ public abstract class Particle{
 					w--;
 					h--;
 					generateI();
-					canSwap = !canSwap;
 				}
 			}
 		}
-		canSwap = !canSwap;
 		updateWH(w, h);
 	}
 	

@@ -14,10 +14,12 @@ public class ParticleTypes {
 	public static final byte ROCK = 6;
 	
 	public static final byte ACID = 7;
-	public static final byte ACIDVAPOR = 7;
+	public static final byte ACIDVAPOR = 8;
 	public static final byte GLASS = 9;
 	
 	public static final byte VOID = 10;
 	public static final byte SPAWNER = 11;
+	
+	public static final byte OIL = 12;
 	
 }

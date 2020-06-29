@@ -31,14 +31,16 @@ public class ParticlePallet {
 		SelectionItem wall = new SelectionItem("Wall", new Wall());
 		SelectionItem rock = new SelectionItem("Rock", new Rock());
 		SelectionItem acid = new SelectionItem("Acid", new Acid());
+		SelectionItem acidvapor = new SelectionItem("Acid Vapor", new AcidVapor());
 		SelectionItem glass = new SelectionItem("Glass", new Glass());
 		SelectionItem fire = new SelectionItem("Fire", new Fire());
 		SelectionItem smoke = new SelectionItem("Smoke", new Smoke());
 		SelectionItem plasma = new SelectionItem("Plasma", new Plasma());
 		SelectionItem spawnerparticle = new SelectionItem("Spawner", new SpawnerParticle());
 		SelectionItem voidparticle = new SelectionItem("Void" , new VoidParticle());
+		SelectionItem oil = new SelectionItem("Oil", new Oil());
 		
-		SelectionItem[] list = {water,watervapor,lava,wall,rock,acid,glass,fire,smoke,plasma,spawnerparticle,voidparticle};
+		SelectionItem[] list = {water,watervapor,lava,wall,rock,acid,acidvapor,glass,fire,smoke,plasma,spawnerparticle,voidparticle,oil};
 		
 		JComboBox<SelectionItem> comboBox = new JComboBox<SelectionItem>(list);
 		

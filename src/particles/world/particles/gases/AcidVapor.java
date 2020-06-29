@@ -16,7 +16,7 @@ public class AcidVapor extends Particle{
 		logic = true;
 		logic_update_time = 100;
 		update_time = 50;
-		density = 2;
+		density = 1;
 		particle_class = this.getClass();
 	}
 

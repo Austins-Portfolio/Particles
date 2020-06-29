@@ -15,6 +15,7 @@ public class Acid extends Particle{
 		liquid = true;
 		gas = false;
 		logic = true;
+		density = 1.25;
 		logic_update_time = 100;
 		particle_class = this.getClass();
 	}
