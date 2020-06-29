@@ -4,78 +4,103 @@ import particles.world.particles.solids.*;
 import particles.world.particles.liquids.*;
 import particles.world.particles.gases.*;
 import particles.world.particles.special.*;
+import java.awt.GridLayout;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
 
 public class ParticlePallet {
 
+	private Class<?> particle_class_1;
+	private Class<?> particle_class_2;
+	private String name_1;
+	private String name_2;
 	public int selection = 1;
 	
-	public void setSelection(int new_selection) {
-		selection = new_selection;
-	}
-	
-	public Particle getLeftSelection() {
-		switch(selection) {
-			case 1:{
-				return new Water();
-			}
-			case 2:{
-				return new Wall();
-			}
-			case 3:{
-				return new Acid();
-			}
-			case 4:{
-				return new Fire();
-			}
-			case 5:{
-				return new VoidParticle();
-			}
-		};
+	public void buildPallet(JFrame frame) {
+		frame.setResizable(false);
+		frame.setLayout(new GridLayout(2,1));
 		
-		return null;
+		SelectionItem water = new SelectionItem("Water", new Water());
+		SelectionItem lava = new SelectionItem("Lava", new Lava());
+		SelectionItem wall = new SelectionItem("Wall", new Wall());
+		SelectionItem rock = new SelectionItem("Rock", new Rock());
+		SelectionItem acid = new SelectionItem("Acid", new Acid());
+		SelectionItem glass = new SelectionItem("Glass", new Glass());
+		SelectionItem fire = new SelectionItem("Fire", new Fire());
+		SelectionItem smoke = new SelectionItem("Smoke", new Smoke());
+		SelectionItem plasma = new SelectionItem("Plasma", new Plasma());
+		SelectionItem spawnerparticle = new SelectionItem("Spawner", new SpawnerParticle());
+		SelectionItem voidparticle = new SelectionItem("Void" , new VoidParticle());
+		
+		SelectionItem[] list = {water,lava,wall,rock,acid,glass,fire,smoke,plasma,spawnerparticle,voidparticle};
+		
+		JComboBox<SelectionItem> comboBox = new JComboBox<SelectionItem>(list);
+		
+		comboBox.setVisible(true);
+		
+		comboBox.addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				SelectionItem si = (SelectionItem) e.getItem();
+				Particle p = si.getParticle();
+				particle_class_1 = p.getParticle_class();
+				name_1 = si.getName();
+			}
+		
+		});
+		
+		JComboBox<SelectionItem> comboBox2 = new JComboBox<SelectionItem>(list);
+		
+		comboBox2.setVisible(true);
+		
+		comboBox2.addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				SelectionItem si = (SelectionItem) e.getItem();
+				Particle p = si.getParticle();
+				particle_class_2 = p.getParticle_class();
+				name_2 = si.getName();
+			}
+		
+		});
+		
+		frame.add(comboBox);
+		frame.add(comboBox2);
+		
+		comboBox.setSelectedItem(water);
+		comboBox2.setSelectedItem(lava);
+		
+		particle_class_1 = water.getParticle().getParticle_class();
+		name_1 = water.getName();
+		particle_class_2 = lava.getParticle().getParticle_class();
+		name_2 = lava.getName();
+		
+		frame.validate();
 	}
 	
 	public Particle getRightSelection() {
-		switch(selection) {
-		case 1:{
-			return new Lava();
-		}
-		case 2:{
-			return new Rock();
-		}
-		case 3:{
-			return new Glass();
-		}
-		case 4:{
-			return new WaterVapor();
-		}
-		case 5:{
-			return new SpawnerParticle();
-		}
-	};
-		
-		return null;
+		return clone(particle_class_1);
+	}
+	
+	public Particle getLeftSelection() {
+		return clone(particle_class_2);
 	}
 	
 	public String getSelectionAsString() {
-		switch(selection) {
-			case 1:{
-				return "[Water,Lava]";
-			}
-			case 2:{
-				return "[Wall,Rock]";
-			}
-			case 3:{
-				return "[Acid,Glass]";
-			}
-			case 4:{
-				return "[Fire,WaterVapor]";
-			}
-			case 5:{
-				return "[Void,Spawner]";
-			}
-		};
-		return "";
+		return name_1+":"+name_2;
+	}
+	
+	public Particle clone(Class<?> particle_class) {
+		try {
+			return (Particle) Class.forName(particle_class.getName()).getConstructor().newInstance();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 }

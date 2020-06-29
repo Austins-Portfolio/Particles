@@ -23,26 +23,6 @@ public class Keys implements KeyListener{
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if(e.getKeyCode() == KeyEvent.VK_1) {
-			particlePallet.setSelection(1);
-		}
-		
-		if(e.getKeyCode() == KeyEvent.VK_2) {
-			particlePallet.setSelection(2);
-		}
-		
-		if(e.getKeyCode() == KeyEvent.VK_3) {
-			particlePallet.setSelection(3);
-		}
-		
-		if(e.getKeyCode() == KeyEvent.VK_4) {
-			particlePallet.setSelection(4);
-		}
-		
-		if(e.getKeyCode() == KeyEvent.VK_5) {
-			particlePallet.setSelection(5);
-		}
-		
 		if(e.getKeyCode() == KeyEvent.VK_SPACE) {
 			world.flipShould_Update();
 		}

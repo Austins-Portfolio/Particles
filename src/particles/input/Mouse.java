@@ -33,14 +33,14 @@ public class Mouse implements MouseListener{
 				if(leftdown) {
 					for(int x = mouseMotion.x-mouseSize/2; x < mouseMotion.x+mouseSize/2;x++) {
 						for(int y = mouseMotion.y-mouseSize/2; y < mouseMotion.y+mouseSize/2;y++) {
-							world.addParticleMouse(x, y, particlePallet.getLeftSelection());
+							world.addParticleMouse(x, y, particlePallet.getRightSelection());
 						}
 					}
 				}
 				if(rightdown) {
 					for(int x = mouseMotion.x-mouseSize/2; x < mouseMotion.x+mouseSize/2;x++) {
 						for(int y = mouseMotion.y-mouseSize/2; y < mouseMotion.y+mouseSize/2;y++) {
-							world.addParticleMouse(x, y, particlePallet.getRightSelection());
+							world.addParticleMouse(x, y, particlePallet.getLeftSelection());
 						}
 					}
 				}
