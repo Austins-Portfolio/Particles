@@ -17,7 +17,7 @@ public class Rock extends Particle{
 		update_time = 100;
 		logic_update_time = 100;
 		non_insulator = true;
-		heat_dispersion_rate = 0.00001;
+		heat_dispersion_rate = 0.01;
 		particle_class = this.getClass();
 	}
 	

@@ -16,7 +16,7 @@ public class Oil extends Particle{
 		non_insulator = true;
 		melting_point = 600;
 		freezing_point = 32;
-		heat_dispersion_rate = 0.40;
+		heat_dispersion_rate = 1;
 		density = 2;
 		update_time = 10;
 		logic = true;
@@ -34,7 +34,7 @@ public class Oil extends Particle{
 	public void vaporize(World world, int w, int h) {
 		if(heat >= melting_point) {
 			Fire fire = new Fire();
-			fire.setHeat(heat+800);
+			fire.setHeat(heat+1200);
 			world.addParticle(w, h, fire);
 		}
 	}
