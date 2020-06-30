@@ -20,7 +20,7 @@ public class Plasma extends Particle{
 		update_time = 50;
 		logic_update_time = 100;
 		life_time = 2000;
-		heat = 1000000000;
+		heat = 10000;
 		heat_dispersion_rate = 1;
 		particle_class = this.getClass();
 	}

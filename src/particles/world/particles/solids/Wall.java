@@ -10,6 +10,7 @@ public class Wall extends Particle{
 	public Wall() {
 		type = ParticleTypes.WALL;
 		color = Color.WHITE;
+		particle_class = this.getClass();
 	}
 
 }
