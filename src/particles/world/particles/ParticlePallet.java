@@ -44,8 +44,9 @@ public class ParticlePallet {
 		SelectionItem spawnerparticle = new SelectionItem("Spawner", new SpawnerParticle());
 		SelectionItem voidparticle = new SelectionItem("Void" , new VoidParticle());
 		SelectionItem oil = new SelectionItem("Oil", new Oil());
+		SelectionItem gasoline = new SelectionItem("Gasoline", new Gasoline());
 		
-		SelectionItem[] list = {water,watervapor,lava,wall,rock,acid,acidvapor,glass,fire,smoke,plasma,spawnerparticle,voidparticle,oil};
+		SelectionItem[] list = {water,watervapor,lava,wall,rock,acid,acidvapor,glass,fire,smoke,plasma,spawnerparticle,voidparticle,oil,gasoline};
 		
 		JComboBox<SelectionItem> comboBox = new JComboBox<SelectionItem>(list);
 		

@@ -21,5 +21,6 @@ public class ParticleTypes {
 	public static final byte SPAWNER = 11;
 	
 	public static final byte OIL = 12;
+	public static final byte GASOLINE = 13;
 	
 }
