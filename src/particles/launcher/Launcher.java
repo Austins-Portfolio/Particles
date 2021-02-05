@@ -47,7 +47,7 @@ public class Launcher {
 			public void tick() {
 				starttime = System.currentTimeMillis();
 				update_clock.pause();
-				update_clock.sleepTillDone(this, 10);
+				//update_clock.sleepTillDone(this, 10);
 				Graphics2D g2 = window.getGraphics();
 				g2.clearRect(0, 0, window.getWidth(), window.getHeight());
 				world.draw(g2);
