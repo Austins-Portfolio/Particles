@@ -23,7 +23,7 @@ public class Launcher {
 		window.getFrame().addMouseWheelListener(mouse.mouseWheel);
 		window.getFrame().addKeyListener(keys);
 		
-		Clock update_clock = new Clock(1000/240) {
+		Clock update_clock = new Clock(1000/60) {
 			
 			@Override
 			public void tick() {
