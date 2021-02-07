@@ -11,6 +11,10 @@ import particles.world.particles.ParticlePallet;
 public class Launcher {
 	
 	public static void main(String[] args) {
+		
+	}
+	
+	public static void launch() {
 		Window window = new Window(1280,720,"Particles");
 		Window window2 = new Window(400, 100, "Particle Pallet");
 		World world = new World(window.getWidth(), window.getHeight(), 6);

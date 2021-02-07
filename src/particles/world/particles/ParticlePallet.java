@@ -2,6 +2,7 @@ package particles.world.particles;
 
 import particles.world.particles.solids.*;
 import particles.world.particles.liquids.*;
+import particles.mod.ModLoader;
 import particles.world.World;
 import particles.world.particles.gases.*;
 import particles.world.particles.special.*;
@@ -13,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -46,7 +48,27 @@ public class ParticlePallet {
 		SelectionItem oil = new SelectionItem("Oil", new Oil());
 		SelectionItem gasoline = new SelectionItem("Gasoline", new Gasoline());
 		
-		SelectionItem[] list = {water,watervapor,lava,wall,rock,acid,acidvapor,glass,fire,smoke,plasma,spawnerparticle,voidparticle,oil,gasoline};
+		ArrayList<SelectionItem> list_a = new ArrayList<SelectionItem>();
+		list_a.add(water);
+		list_a.add(watervapor);
+		list_a.add(lava);
+		list_a.add(wall);
+		list_a.add(rock);
+		list_a.add(acid);
+		list_a.add(acidvapor);
+		list_a.add(glass);
+		list_a.add(fire);
+		list_a.add(smoke);
+		list_a.add(plasma);
+		list_a.add(spawnerparticle);
+		list_a.add(voidparticle);
+		list_a.add(oil);
+		list_a.add(gasoline);
+		
+		list_a.addAll(ModLoader.items);
+		
+		SelectionItem[] list = new SelectionItem[list_a.size()];
+		list_a.toArray(list);
 		
 		JComboBox<SelectionItem> comboBox = new JComboBox<SelectionItem>(list);
 		
