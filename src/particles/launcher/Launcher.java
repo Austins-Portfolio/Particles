@@ -11,6 +11,11 @@ import particles.world.particles.ParticlePallet;
 public class Launcher {
 	
 	public static void main(String[] args) {
+		System.setProperty("sun.java2d.opengl", "true");
+		launch();
+	}
+	
+	public static void launch() {
 		Window window = new Window(1280,720,"Particles");
 		Window window2 = new Window(400, 100, "Particle Pallet");
 		World world = new World(window.getWidth(), window.getHeight(), 6);
@@ -18,10 +23,10 @@ public class Launcher {
 		pp.buildPallet(window2.getFrame(), world);
 		Mouse mouse = new Mouse(world, pp);
 		Keys keys = new Keys(world,pp);
-		window.getFrame().addMouseListener(mouse);
-		window.getFrame().addMouseMotionListener(mouse.mouseMotion);
-		window.getFrame().addMouseWheelListener(mouse.mouseWheel);
-		window.getFrame().addKeyListener(keys);
+		window.getCanvas().addMouseListener(mouse);
+		window.getCanvas().addMouseMotionListener(mouse.mouseMotion);
+		window.getCanvas().addMouseWheelListener(mouse.mouseWheel);
+		window.getCanvas().addKeyListener(keys);
 		
 		Clock update_clock = new Clock(1000/60) {
 			
@@ -47,7 +52,7 @@ public class Launcher {
 			public void tick() {
 				starttime = System.currentTimeMillis();
 				update_clock.pause();
-				update_clock.sleepTillDone(this, 10);
+				//update_clock.sleepTillDone(this, 10);
 				Graphics2D g2 = window.getGraphics();
 				g2.clearRect(0, 0, window.getWidth(), window.getHeight());
 				world.draw(g2);
