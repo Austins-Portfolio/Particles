@@ -1,5 +1,6 @@
 package particles.graphics;
 
+import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
@@ -14,7 +15,9 @@ public class Window {
 	private boolean built = false;
 	
 	private JFrame frame;
+	private Canvas canvas;
 	private BufferStrategy bs;
+	private BufferStrategy cbs;
 	
 	public Window(int width, int height, String name) {
 		this.width = width;
@@ -36,17 +39,27 @@ public class Window {
 		}
 		frame.setBackground(Color.BLACK);
 		frame.setVisible(true);
+		
+		canvas = new Canvas();
+		canvas.setSize(width, height);
+		canvas.setIgnoreRepaint(true);
+		canvas.setBackground(Color.BLACK);
+		frame.add(canvas);
+		
 		frame.createBufferStrategy(2);
+		canvas.createBufferStrategy(2);
 		bs = frame.getBufferStrategy();
+		cbs = canvas.getBufferStrategy();
 		built = true;
 	}
 	
 	public Graphics2D getGraphics() {
-		Graphics2D g2 = (Graphics2D) bs.getDrawGraphics();
+		Graphics2D g2 = (Graphics2D) cbs.getDrawGraphics();
 		return g2;
 	}
 	
 	public void swapBuffer() {
+		cbs.show();
 		bs.show();
 	}
 	
@@ -56,11 +69,11 @@ public class Window {
 	}
 
 	public int getWidth() {
-		return width;
+		return canvas.getWidth();
 	}
 
 	public int getHeight() {
-		return height;
+		return canvas.getHeight();
 	}
 
 	public String getName() {
@@ -69,6 +82,10 @@ public class Window {
 
 	public boolean isBuilt() {
 		return built;
+	}
+	
+	public Canvas getCanvas() {
+		return canvas;
 	}
 
 	public JFrame getFrame() {
